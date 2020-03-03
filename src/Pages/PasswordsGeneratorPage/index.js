@@ -11,6 +11,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
+import { Divider } from '@material-ui/core';
+
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { style } from './style';
@@ -19,17 +21,31 @@ const PasswordsGeneratorPage = () => {
   const classes = style();
 
   // slider
-  const [lenghtValue, setValueLenght] = React.useState(8);
+  const [value, setValue] = React.useState(8);
 
   const handleSliderChange = (event, newValue) => {
-    setValueLenght(newValue);
+    setValue(newValue);
   };
+
+  const handleBlur = () => {
+    if (value < 8) {
+      setValue(8);
+    } else if (value > 100) {
+      setValue(100);
+    }
+  };
+
+  const handleInputChange = event => {
+    setValue(event.target.value === '' ? '' : Number(event.target.value));
+  };
+
 
   // checkbox
   const [state, setState] = React.useState({
     simpleLetters: true,
     complexLetters: true,
     numbers: true,
+    allChecked: true,
     symbols: true,
   });
 
@@ -37,7 +53,7 @@ const PasswordsGeneratorPage = () => {
     setState({ ...state, [name]: event.target.checked });
   };
 
-  const { simpleLetters, complexLetters, numbers, symbols } = state;
+  let { simpleLetters, complexLetters, numbers, symbols, allChecked } = state;
 
 
   // generate pwd
@@ -47,7 +63,7 @@ const PasswordsGeneratorPage = () => {
     const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const lowercase = 'abcdefghijklmnopqrstuvwxyz';
     const numbersChar = '0123456789';
-    const symbolsChar = '%^]-\|÷×[]³£ß«»@{}µ«»~¡^°`•´˜¨¤!»#$%&/()=?*~{};:_> @’ ^[]y<,.-';
+    const symbolsChar = '%^]-\|÷×[]£«»@{}µ«»~¡^°`•´˜¨¤!»#$%&/()=?*~{};:_> @’^[]y<,.-';
 
     if (simpleLetters == true) {
       characters += lowercase;
@@ -72,10 +88,21 @@ const PasswordsGeneratorPage = () => {
 
   const generatePassword = () => {
     let pwd = '';
+
+    if (symbols == true && numbers == true && complexLetters == true && simpleLetters == true) {
+      allChecked = true;
+    }
+    if (allChecked == true) {
+      symbols = true;
+      numbers = true;
+      complexLetters = true;
+      simpleLetters = true;
+    }
     if (symbols == false && numbers == false && complexLetters == false && simpleLetters == false) {
       pwd = 'Aucuns paramètres cochés.'
-    } else {
-      pwd = generateAll(lenghtValue)
+    }
+    else {
+      pwd = generateAll(value);
     }
     return pwd;
   }
@@ -97,7 +124,7 @@ const PasswordsGeneratorPage = () => {
           </Grid>
           <Grid item xs>
             <Slider
-              lenghtValue={typeof lenghtValue === 'number' ? lenghtValue : 0}
+              value={typeof value === 'number' ? value : 0}
               onChange={handleSliderChange}
               aria-labelledby="input-slider"
               min={8}
@@ -105,7 +132,19 @@ const PasswordsGeneratorPage = () => {
             />
           </Grid>
           <Grid item>
-            <span>{lenghtValue}</span>
+            <Input
+              value={value}
+              margin="dense"
+              onChange={handleInputChange}
+              onBlur={handleBlur}
+              inputProps={{
+                step: 1,
+                min: 8,
+                max: 100,
+                type: 'number',
+                'aria-labelledby': 'input-slider',
+              }}
+            />
           </Grid>
         </Grid>
       </div>
@@ -113,6 +152,16 @@ const PasswordsGeneratorPage = () => {
       <FormControl component="fieldset" className={classes.formControl}>
         <FormLabel component="legend">Paramètres</FormLabel>
         <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={allChecked}
+                color="primary"
+                onChange={handleChange('allChecked')}
+                value="allChecked" />}
+            label="Tout cocher"
+          />
+          <Divider variant="middle" />
           <FormControlLabel
             control={
               <Checkbox
