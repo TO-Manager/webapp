@@ -37,6 +37,7 @@ const PasswordsGeneratorPage = () => {
 
   const handleInputChange = event => {
     setValue(event.target.value === '' ? '' : Number(event.target.value));
+    setState({ ...state, valueInput: generatePassword() });
   };
 
 

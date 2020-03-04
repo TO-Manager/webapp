@@ -4,7 +4,6 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import logo from './logo.svg';
 import './App.css';
 
 import RegisterPage from './Pages/RegisterPage/';
@@ -14,6 +13,7 @@ import DashboardPage from "./Pages/DashboardPage/";
 import PasswordsPage from "./Pages/PasswordsPage/";
 import PasswordsGeneratorPage from "./Pages/PasswordsGeneratorPage/";
 import SettingsPage from './Pages/SettingsPage/';
+
 
 import Menu from './Components/Menu/';
 
@@ -47,9 +47,9 @@ const routes = [
 
 export default function Sidebar() {
   return (
+
     <Router>
       <Menu />
-
       <Switch>
         {routes.map((route, index) => (
           <Route
