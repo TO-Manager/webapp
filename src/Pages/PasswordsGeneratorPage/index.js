@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -26,6 +26,7 @@ const PasswordsGeneratorPage = () => {
 
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
+    setState({ ...state, valueInput: generatePassword() });
   };
 
   const handleBlur = () => {
@@ -48,6 +49,7 @@ const PasswordsGeneratorPage = () => {
     numbers: true,
     allChecked: true,
     symbols: true,
+    valueInput: '',
   });
 
   const handleChange = name => event => {
@@ -71,6 +73,7 @@ const PasswordsGeneratorPage = () => {
     }
     if (complexLetters == true) {
       characters += uppercase;
+      characters += lowercase;
     }
     if (numbers == true) {
       characters += numbersChar;
@@ -108,15 +111,26 @@ const PasswordsGeneratorPage = () => {
     return pwd;
   }
 
+  const setValueInput = () => {
+    setState({ ...state, valueInput: generatePassword() });
+    return state.valueInput;
+  }
+
+  const getValueInput = () => {
+    return state.valueInput;
+  }
+
+
+
+
   return (
     <Container component="main" maxWidth="lg">
-
       <h1>Générateur de mot de passe</h1>
       <h2>
         <TextField
           className={classes.input}
           id="outlined-number"
-          value={generatePassword()}
+          value={getValueInput()}
           label="Mot de passe généré"
           InputLabelProps={{
             shrink: true,
@@ -126,12 +140,25 @@ const PasswordsGeneratorPage = () => {
       </h2>
 
       <div className={classes.button}>
-        <Button variant="contained">
+        <Button variant="contained"
+          onClick={() => {
+            setValueInput()
+          }}
+        >
           Regénérer
         </Button>
-        <Button variant="contained" color="secondary" >
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => {
+            // copyCodeToClipboard()
+          }}
+        >
           Copier
         </Button>
+        
+
+       
       </div>
 
 
@@ -190,7 +217,7 @@ const PasswordsGeneratorPage = () => {
                 color="primary"
                 onChange={handleChange('simpleLetters')}
                 value="simpleLetters" />}
-            label="Lettres"
+            label="Lettres minuscules"
           />
           <FormControlLabel
             control={
