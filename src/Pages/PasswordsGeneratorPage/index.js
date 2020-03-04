@@ -12,6 +12,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Divider } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
@@ -107,12 +108,32 @@ const PasswordsGeneratorPage = () => {
     return pwd;
   }
 
-
-
   return (
     <Container component="main" maxWidth="lg">
 
       <h1>Générateur de mot de passe</h1>
+      <h2>
+        <TextField
+          className={classes.input}
+          id="outlined-number"
+          value={generatePassword()}
+          label="Mot de passe généré"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
+        />
+      </h2>
+
+      <div className={classes.button}>
+        <Button variant="contained">
+          Regénérer
+        </Button>
+        <Button variant="contained" color="secondary" >
+          Copier
+        </Button>
+      </div>
+
 
       <div className={classes.lenght}>
         <Typography id="input-slider" gutterBottom>
@@ -200,21 +221,6 @@ const PasswordsGeneratorPage = () => {
           />
         </FormGroup>
       </FormControl>
-      <h2>
-        <TextField
-          className={classes.input}
-          id="outlined-number"
-          value={generatePassword()}
-          label="Mot de passe généré"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-        />
-
-
-
-      </h2>
 
 
 
