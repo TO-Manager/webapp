@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useRef, useState } from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -13,8 +13,6 @@ import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Divider } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { style } from './style';
 
@@ -120,14 +118,12 @@ const PasswordsGeneratorPage = () => {
     return state.valueInput;
   }
 
-
-
-
   return (
     <Container component="main" maxWidth="lg">
       <h1>Générateur de mot de passe</h1>
       <h2>
         <TextField
+         
           className={classes.input}
           id="outlined-number"
           value={getValueInput()}
@@ -147,18 +143,18 @@ const PasswordsGeneratorPage = () => {
         >
           Regénérer
         </Button>
+
         <Button
           variant="contained"
           color="secondary"
           onClick={() => {
-            // copyCodeToClipboard()
+            navigator.clipboard.writeText(getValueInput())
           }}
         >
           Copier
-        </Button>
-        
+          </Button>
 
-       
+
       </div>
 
 
