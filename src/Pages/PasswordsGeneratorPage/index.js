@@ -48,7 +48,7 @@ const PasswordsGeneratorPage = () => {
     numbers: true,
     allChecked: true,
     symbols: true,
-    valueInput: '',
+    valueInput: 'Choississez la longueur de votre mot de passe.',
   });
 
   const handleChange = name => event => {
@@ -65,7 +65,7 @@ const PasswordsGeneratorPage = () => {
     const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const lowercase = 'abcdefghijklmnopqrstuvwxyz';
     const numbersChar = '0123456789';
-    const symbolsChar = '%^]-\|÷×[]£«»@{}µ«»~¡^°`•´˜¨¤!»#$%&/()=?*~{};:_> @’^[]y<,.-';
+    const symbolsChar = '%^]-\|÷×[]£«»@{}µ«»~¡!»#$%&/()=?*~{};:_>[]y<,.-';
 
     if (simpleLetters == true) {
       characters += lowercase;
