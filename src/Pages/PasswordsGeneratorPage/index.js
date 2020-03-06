@@ -36,8 +36,14 @@ const PasswordsGeneratorPage = () => {
   };
 
   const handleInputChange = event => {
-    setValue(event.target.value === '' ? '' : Number(event.target.value));
-    setState({ ...state, valueInput: generatePassword() });
+    if (value > 100) {
+      setValue(event.target.value === '' ? '' : Number(100));
+      setState({ ...state, valueInput: generatePassword() });
+    } else {
+      setValue(event.target.value === '' ? '' : Number(event.target.value));
+      setState({ ...state, valueInput: generatePassword() });
+    }
+
   };
 
 
@@ -124,7 +130,6 @@ const PasswordsGeneratorPage = () => {
       <h1>Générateur de mot de passe</h1>
       <h2>
         <TextField
-         
           className={classes.input}
           id="outlined-number"
           value={getValueInput()}
