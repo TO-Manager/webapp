@@ -7,9 +7,6 @@ export const style = makeStyles(theme => ({
   margin: {
     height: theme.spacing(3),
   },
-  input: {
-    width: 42,
-  },
   formControl: {
     margin: theme.spacing(3),
   },

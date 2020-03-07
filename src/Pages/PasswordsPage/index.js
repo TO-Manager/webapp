@@ -1,18 +1,12 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 
-import { style } from './style';
+const PasswordsPage = () => (
+  <Container component="main" maxWidth="lg">
 
-const PasswordsPage = () => {
-    const classes = style();
+    <h1>Passwords</h1>
 
-    return (
-        <Container component="main" maxWidth="lg">
-          
-          <h1>Passwords</h1>
-
-        </Container>
-    );
-}
+  </Container>
+);
 
 export default PasswordsPage;

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -13,7 +13,6 @@ import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Divider } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-
 import { style } from './style';
 
 const PasswordsGeneratorPage = () => {
@@ -43,7 +42,6 @@ const PasswordsGeneratorPage = () => {
       setValue(event.target.value === '' ? '' : Number(event.target.value));
       setState({ ...state, valueInput: generatePassword() });
     }
-
   };
 
 
@@ -71,19 +69,19 @@ const PasswordsGeneratorPage = () => {
     const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const lowercase = 'abcdefghijklmnopqrstuvwxyz';
     const numbersChar = '0123456789';
-    const symbolsChar = '%^]-\|÷×[]£«»@{}µ«»~¡!»#$%&/()=?*~{};:_>[]y<,.-';
+    const symbolsChar = '%^]-\\|÷×[]£«»@{}µ«»~¡!»#$%&/()=?*~{};:_>[]y<,.-';
 
-    if (simpleLetters == true) {
+    if (simpleLetters === true) {
       characters += lowercase;
     }
-    if (complexLetters == true) {
+    if (complexLetters === true) {
       characters += uppercase;
       characters += lowercase;
     }
-    if (numbers == true) {
+    if (numbers === true) {
       characters += numbersChar;
     }
-    if (symbols == true) {
+    if (symbols === true) {
       characters += symbolsChar;
     }
 
@@ -98,16 +96,16 @@ const PasswordsGeneratorPage = () => {
   const generatePassword = () => {
     let pwd = '';
 
-    if (symbols == true && numbers == true && complexLetters == true && simpleLetters == true) {
+    if (symbols === true && numbers === true && complexLetters === true && simpleLetters === true) {
       allChecked = true;
     }
-    if (allChecked == true) {
+    if (allChecked === true) {
       symbols = true;
       numbers = true;
       complexLetters = true;
       simpleLetters = true;
     }
-    if (symbols == false && numbers == false && complexLetters == false && simpleLetters == false) {
+    if (symbols === false && numbers === false && complexLetters === false && simpleLetters === false) {
       pwd = 'Aucuns paramètres cochés.'
     }
     else {
